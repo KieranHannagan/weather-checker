@@ -9,26 +9,97 @@
     <link href="assets/css/style.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient">
+  <!-- NavBar -->
+    <nav class="mb-3 navbar navbar-expand-lg navbar-dark" style="background-image: linear-gradient(to left, rgb(4, 9, 59), rgb(9, 105, 149))">
         <div class="container-fluid justify-content-center">
           <a class="navbar-brand" href="./index.html"><h1>Weather Dashboard</h1></a>
           </div>
     </nav>
-    <div class="container row ">
-        
-          <div class="col-4">
+    <!-- Main content -->
+    <main class="container">
+    <!-- row representing the entire content -->
+        <div class="row">
+          <!-- left-side column -->
+          <div class="col-3 ">
+            <div class="row">
               <div>
                 <h2><strong>Search for City:</strong></h2>
-
               </div>
-            <div class="row input-group mb-3">
+              <div class="d-grid gap-2">
                 <span class="input" id="basic-addon1"></span>
-                <input type="text" class="form-control" placeholder="San Diego" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="San Diego" >
+                <button class = " border-bottom btn btn-info" style="margin-bottom: 1rem; background-color: rgb(9, 105, 149); color:aliceblue;" type="button">Search</button>
+
+                <div class="d-grid gap-2 ">
+                  <button class="btn btn-secondary" type="button">Button</button>
+                  <button class="btn btn-secondary" type="button">Button</button>
+                  <button class="btn btn-secondary" type="button">Button</button>
+                  <button class="btn btn-secondary" type="button">Button</button>
+                </div>
               </div>
-                      </div>
-          <div class="col-8 card border border-dark">
-            <h1>Atlanta</h1>
+            </div>
           </div>
-        
+          <!-- right-side column -->
+          <div class="col-9">
+            <div class="row card border border-dark mb-4">
+              <h1 id="current-location">Atlanta</h1>
+              <p>Temp:</p>
+              <p>Wind:</p>
+              <p>Humidity:</p>
+              <p>UV Index:</p>
+            </div>
+            <div class="row">
+              <!-- title -->
+              <h3>5 Day Forecast:</h3>
+
+              <div class="card-group text-white">
+                <div class="card" style="background-color: rgb(4, 9, 59);">
+                  <div class="card-body">
+                    <h5 class="card-title">Monday</h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+                <div class="card" style="background-color: rgb(4, 9, 59);">
+                  <div class="card-body">
+                    <h5 class="card-title">Tuesday</h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+                <div class="card" style="background-color: rgb(4, 9, 59);">
+                  <div class="card-body">
+                    <h5 class="card-title">Wednesday</h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+                <div class="card" style="background-color: rgb(4, 9, 59);">
+                  <div class="card-body">
+                    <h5 class="card-title">Thursday</h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+                <div class="card" style="background-color: rgb(4, 9, 59);">
+                  <div class="card-body">
+                    <h5 class="card-title">Friday</h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+              </div>
+          </div>
+          
+          </div>
+  
+    </main>
+
+        <!-- Jquery links -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- Moment.Js link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <!-- JavaScript Link -->
+    <script src="assets/js/script.js"></script>
+
 </body>
 </html>
