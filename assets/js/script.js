@@ -20,14 +20,21 @@ searchButton.on("click", function(){
                         // rounding temp and converting to fahrenheit
                         var frTemp = 9/5*(temp - 273) + 32
                         var roundedTemp = frTemp.toFixed(2)
+
+                            // name date and icon
+                        // getting date
+                        var date = moment().format("l")
+                        document.querySelector("#current-location").textContent = nameValue + " " + "(" + date + ")";
+                        iconImgEl = document.createElement("img")
+                        var iconCode = data["weather"]["0"]["icon"]
+                        iconImgEl.src = "http://openweathermap.org/img/w/" + iconCode + ".png"
+                        console.log(iconImgEl)
+                        document.getElementById("current-location").appendChild(iconImgEl)
+
                         // setting text on screen to current weather
-                        document.querySelector("#current-location").textContent = nameValue;
                         document.querySelector("#current-temp").textContent = "Temp: " + roundedTemp + " °F";
                         document.querySelector("#current-wind").textContent = "Wind: " + wind + " mph";
                         document.querySelector("#current-humidity").textContent = "Humidity: " + humidity + "%";
-
-                        console.log(nameValue)
-                        console.log(roundedTemp + " °F")
 
                             // fetching UV index
                             var getUvIndex = function(lat,lon){
@@ -38,16 +45,11 @@ searchButton.on("click", function(){
                                 console.log(data);
                                 var UVI = data['current']['uvi']
                                 document.querySelector("#uv").textContent = "UV Index: " + UVI + "";
-
-                            }
-                                
-                            )
-                            
-
-                                    }
+                                console.log("got here")
+                            })}       
                             getUvIndex(lon,lat);
 
-                    })
+                            })
                     
 
 
