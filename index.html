@@ -27,8 +27,8 @@
               </div>
               <div class="d-grid gap-2">
                 <span class="input" id="basic-addon1"></span>
-                <input type="text" class="form-control" placeholder="San Diego" >
-                <button class = " border-bottom btn btn-info" style="margin-bottom: 1rem; background-color: rgb(9, 105, 149); color:aliceblue;" type="button">Search</button>
+                <input id = "city-name" type="text" class="form-control" placeholder="San Diego" >
+                <input id = "search" value="Search" class = " border-bottom btn btn-info" style="margin-bottom: 1rem; background-color: rgb(9, 105, 149); color:aliceblue;" type="submit"></input>
 
                 <div class="d-grid gap-2 ">
                   <button class="btn btn-secondary" type="button">Button</button>
@@ -39,48 +39,65 @@
               </div>
             </div>
           </div>
-          <!-- right-side column -->
+                <!-- right-side column -->
+                
+          <!-- current info -->
           <div class="col-9">
             <div class="row card border border-dark mb-4">
-              <h1 id="current-location">Atlanta</h1>
-              <p>Temp:</p>
-              <p>Wind:</p>
-              <p>Humidity:</p>
-              <p>UV Index:</p>
+              <h1 id="current-location">City</h1>
+              <p id="current-temp">Temp:</p>
+              <p id="current-wind">Wind:</p>
+              <p id="current-humidity">Humidity:</p>
+              <p id="uv">UV Index:</p>
             </div>
             <div class="row">
-              <!-- title -->
+              <!-- 5 dat forecast -->
               <h3>5 Day Forecast:</h3>
 
               <div class="card-group text-white">
-                <div class="card" style="background-color: rgb(4, 9, 59);">
+                <div class="card border" style="background-color: rgb(4, 9, 59);">
                   <div class="card-body">
-                    <h5 class="card-title">Monday</h5>
-                    <p class="card-text"></p>
+                    <h5 class="card-title" id = "date-1">Monday</h5>
+                    <p class="card-text" id = "icon-1">icon</p>
+                    <p class="card-text" id = "temp-1">Temp:</p>
+                    <p class="card-text" id = "wind-1">Wind:</p>
+                    <p class="card-text" id = "humidity-1">Humidity:</p>
                   </div>
                 </div>
-                <div class="card" style="background-color: rgb(4, 9, 59);">
+                <div class="card border" style="background-color: rgb(4, 9, 59);">
                   <div class="card-body">
-                    <h5 class="card-title">Tuesday</h5>
-                    <p class="card-text"></p>
+                    <h5 class="card-title" id="date-2">Tuesday</h5>
+                    <p class="card-text" id = "icon-2">icon</p>
+                    <p class="card-text" id = "temp-2">Temp:</p>
+                    <p class="card-text" id = "wind-2">Wind:</p>
+                    <p class="card-text" id = "humidity-2">Humidity:</p>
                   </div>
                 </div>
-                <div class="card" style="background-color: rgb(4, 9, 59);">
+                <div class="card border" style="background-color: rgb(4, 9, 59);">
                   <div class="card-body">
-                    <h5 class="card-title">Wednesday</h5>
-                    <p class="card-text"></p>
+                    <h5 class="card-title" id = "date-3">Wednesday</h5>
+                    <p class="card-text" id = "icon-3">icon</p>
+                    <p class="card-text" id = "temp-3">Temp:</p>
+                    <p class="card-text" id = "wind-3">Wind:</p>
+                    <p class="card-text" id = "humidity-3">Humidity:</p>
                   </div>
                 </div>
-                <div class="card" style="background-color: rgb(4, 9, 59);">
+                <div class="card border" style="background-color: rgb(4, 9, 59);">
                   <div class="card-body">
-                    <h5 class="card-title">Thursday</h5>
-                    <p class="card-text"></p>
+                    <h5 class="card-title" id="date-4">Thursday</h5>
+                    <p class="card-text" id = "icon-4">icon</p>
+                    <p class="card-text" id = "temp-4">Temp:</p>
+                    <p class="card-text" id = "wind-4">Wind:</p>
+                    <p class="card-text" id = "humidity-4">Humidity:</p>
                   </div>
                 </div>
-                <div class="card" style="background-color: rgb(4, 9, 59);">
+                <div class="card border" style="background-color: rgb(4, 9, 59);">
                   <div class="card-body">
-                    <h5 class="card-title">Friday</h5>
-                    <p class="card-text"></p>
+                    <h5 class="card-title" id = "date-5">Friday</h5>
+                    <p class="card-text" id = "icon-5">icon</p>
+                    <p class="card-text" id = "temp-5">Temp:</p>
+                    <p class="card-text" id = "wind-5">Wind:</p>
+                    <p class="card-text" id = "humidity-5">Humidity:</p>
                   </div>
                 </div>
               </div>
