@@ -3,8 +3,14 @@
     margin-right: 0 !important; 
     margin-left: 0 !important; 
 }
-
-.stored-buttons {
+.saved-buttons {
     display:none;
 }
+
+.btn.disabled, .btn:disabled, fieldset:disabled .btn {
+    pointer-events: none;
+    opacity: 1;
+
+}
+
 

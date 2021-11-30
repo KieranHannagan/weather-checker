@@ -1,7 +1,8 @@
 var date = moment().format("l")
 var searchButton = $('#search')
+
 var day = ["1","2","3","4","5"]
-var storedLocations = []
+var storedLocationIds = ["8","7","6","5","4","3","2","1"]
 
         // Fetching Temp, Wind, Humidity and UV
     var gettingWeather = function(cityName) {
@@ -36,17 +37,19 @@ var storedLocations = []
                         // fetching UV index
                         var getUvIndex = function(lat,lon){
                             
-                        fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '4&exclude=hourly,daily&appid=48b311c4f19922ba7960ce06e7fd7ee4')
+                        fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '4&appid=48b311c4f19922ba7960ce06e7fd7ee4')
                             .then(response=>response.json())
                                 .then(data=>{
                                     console.log(data);
                                     var UVI = data['current']['uvi']
                                     document.querySelector("#uv").textContent = "UV Index: " + UVI + "";
+                                    UvScale(UVI);
                                 })
                         // error handling regarding no UV index from API pull
                         .catch(err=> {
                         if(err == "TypeError: Cannot read properties of undefined (reading 'uvi')"){
-                            window.alert("There is no UV Index available")
+                            document.querySelector("#uv").textContent = "UV Index: NA";
+
 
                         }
                     })}       
@@ -167,17 +170,35 @@ var storedLocations = []
             document.getElementById("icon-"+ [i]).textContent = ""
         // }
     }}
-    var saveLocation = function(cityName) {
+        // saving function
+    var createButton = function(cityName) {
         fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=48b311c4f19922ba7960ce06e7fd7ee4").then(function(response) {
-            if (response.ok) {
+            // Checking if fetch promise succeeded, if so it will create a button
+        if (response.ok) {
                 
-        var newButtonEl = document.createElement("input");
-        newButtonEl.value = cityName;
-        newButtonEl.type = "submit"
-        document.getElementById("stored-buttons").appendChild(newButtonEl)
-        $(newButtonEl).addClass("btn btn-secondary stored-buttons")
+                for (let i = 0; i <= 7; i++) {
+                    
+                    
+
+                    var oldButtonText = document.querySelector("#button-"+storedLocationIds[i]).value
+                    
+                    // If button label for the button with the corresponding ID is empty (no saved data)
+                    if (oldButtonText== "") {
+                     
+                        var newButton = $("#button-"+storedLocationIds[i]+":text").val();
+                        newButton = cityName;    
+                        document.querySelector("#button-"+storedLocationIds[i]).value = newButton
+                        console.log(newButton)
+                        $("#button-"+storedLocationIds[i]).removeClass("saved-buttons");
+                        localStorage.setItem("#button-"+storedLocationIds[i],cityName )
+                        break;
+                        
+                    }
+                
+
                 }
-                else {
+                                }
+            else {
                     window.alert ("Please Enter a City")
                 }
     })}
@@ -193,13 +214,53 @@ var storedLocations = []
                     clearContent();
                     fiveDayForecast(cityName);
                     gettingWeather(cityName);
-                    saveLocation(cityName);
+                    createButton(cityName);
                     
 
 
                 } 
     });
+        // Searching through local storage to populate 
+    var getSaved = function(cityName) {
+        for (let i = 0; i <= 7; i++) {
+         if(localStorage.getItem("#button-"+storedLocationIds[i])) {
+            cityName =localStorage.getItem("#button-"+storedLocationIds[i])
+            var newButton = $("#button-"+storedLocationIds[i]+":text").val();
+            newButton = cityName;    
+            document.querySelector("#button-"+storedLocationIds[i]).value = newButton
+            $("#button-"+storedLocationIds[i]).removeClass("saved-buttons");
+            localStorage.setItem("#button-"+storedLocationIds[i],cityName )
+         }
+        }
+    }
+    getSaved();
 
+    var savedButton = $(".re-enter")
+    savedButton.on("click", function() {
+        console.log("clicked")
+            clearContent(); 
+            let SavedId = $(this).attr('id')
+            // SavedId
+            console.log("#" + SavedId)
+            cityName = localStorage.getItem("#" + SavedId)
+            console.log(cityName)
+            fiveDayForecast(cityName);
+            gettingWeather(cityName);
+            
+            console.log(SavedId)
+    })
+                        
+
+    var UvScale = function(UVI) {
+         if (UVI>7){
+            $("#uv").removeClass("btn-secondary").addClass("btn-danger")
+        }   else if (UVI>2){
+        $("#uv").removeClass("btn-secondary").addClass("btn-warning")
+             } else {
+                $("#uv").removeClass("btn-secondary").addClass("btn-primary")
+
+             }
+    }
 
 
 
