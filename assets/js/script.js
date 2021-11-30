@@ -9,7 +9,6 @@ var storedLocationIds = ["8","7","6","5","4","3","2","1"]
         fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=48b311c4f19922ba7960ce06e7fd7ee4")
             .then(response=>response.json())
                 .then(data=>{
-                    console.log(data)
                     // getting weather info from fetch
                     var nameValue = data['name'];
                     var temp = data['main']['temp'];
@@ -40,7 +39,6 @@ var storedLocationIds = ["8","7","6","5","4","3","2","1"]
                         fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '4&appid=48b311c4f19922ba7960ce06e7fd7ee4')
                             .then(response=>response.json())
                                 .then(data=>{
-                                    console.log(data);
                                     var UVI = data['current']['uvi']
                                     document.querySelector("#uv").textContent = "UV Index: " + UVI + "";
                                     UvScale(UVI);
@@ -62,7 +60,6 @@ var storedLocationIds = ["8","7","6","5","4","3","2","1"]
         fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=48b311c4f19922ba7960ce06e7fd7ee4")
         .then(response=>response.json())
             .then(data=>{
-                console.log(data);
                 // Getting Icons
                 iconImgEl = document.createElement("img")
                 var iconZero = data["list"][day[0]]["weather"]["0"]["icon"]
@@ -184,11 +181,10 @@ var storedLocationIds = ["8","7","6","5","4","3","2","1"]
                     
                     // If button label for the button with the corresponding ID is empty (no saved data)
                     if (oldButtonText== "") {
-                     
+                    //  Saving Data
                         var newButton = $("#button-"+storedLocationIds[i]+":text").val();
                         newButton = cityName;    
                         document.querySelector("#button-"+storedLocationIds[i]).value = newButton
-                        console.log(newButton)
                         $("#button-"+storedLocationIds[i]).removeClass("saved-buttons");
                         localStorage.setItem("#button-"+storedLocationIds[i],cityName )
                         break;
@@ -220,7 +216,8 @@ var storedLocationIds = ["8","7","6","5","4","3","2","1"]
 
                 } 
     });
-        // Searching through local storage to populate 
+
+        // Searching through local storage to populate history buttons
     var getSaved = function(cityName) {
         for (let i = 0; i <= 7; i++) {
          if(localStorage.getItem("#button-"+storedLocationIds[i])) {
@@ -234,23 +231,19 @@ var storedLocationIds = ["8","7","6","5","4","3","2","1"]
         }
     }
     getSaved();
-
+// function to re-enter city name upon clicking on saved buttons
     var savedButton = $(".re-enter")
     savedButton.on("click", function() {
-        console.log("clicked")
             clearContent(); 
             let SavedId = $(this).attr('id')
-            // SavedId
-            console.log("#" + SavedId)
+            // Id of button from local storage
             cityName = localStorage.getItem("#" + SavedId)
-            console.log(cityName)
             fiveDayForecast(cityName);
             gettingWeather(cityName);
             
-            console.log(SavedId)
     })
                         
-
+// function to change the color on the UV Index depending of its value
     var UvScale = function(UVI) {
          if (UVI>7){
             $("#uv").removeClass("btn-secondary").addClass("btn-danger")
