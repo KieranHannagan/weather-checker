@@ -1,6 +1,7 @@
 var date = moment().format("l")
 var searchButton = $('#search')
 var day = ["1","2","3","4","5"]
+var storedLocations = []
 
         // Fetching Temp, Wind, Humidity and UV
     var gettingWeather = function(cityName) {
@@ -87,10 +88,25 @@ var day = ["1","2","3","4","5"]
 
                 // Getting Temps
                 var tempZero = data["list"][day[0]]["main"]["temp"]
+                var frTempZero = 9/5*(tempZero - 273) + 32
+                var roundedTempZero = frTempZero.toFixed(2)
+
                 var tempOne = data["list"][day[1]]["main"]["temp"]
+                var frTempOne = 9/5*(tempOne - 273) + 32
+                var roundedTempOne = frTempOne.toFixed(2)
+
                 var tempTwo = data["list"][day[2]]["main"]["temp"]
+                var frTempTwo = 9/5*(tempTwo - 273) + 32
+                var roundedTempTwo = frTempTwo.toFixed(2)
+
                 var tempThree = data["list"][day[3]]["main"]["temp"]
+                var frTempThree = 9/5*(tempThree - 273) + 32
+                var roundedTempThree = frTempThree.toFixed(2)
+
                 var tempFour = data["list"][day[4]]["main"]["temp"]
+                var frTempFour = 9/5*(tempFour - 273) + 32
+                var roundedTempFour = frTempFour.toFixed(2)
+
                 // Getting Winds
                 var windZero = data["list"][day[0]]["wind"]["speed"]
                 var windOne = data["list"][day[1]]["wind"]["speed"]
@@ -112,11 +128,11 @@ var day = ["1","2","3","4","5"]
                 document.querySelector("#date-4").textContent = moment().add(5, 'days').format("l")
 
                 // Setting temps
-                document.querySelector("#temp-0" ).textContent = "Temp: " + tempZero + " °F";
-                document.querySelector("#temp-1" ).textContent = "Temp: " + tempOne + " °F";
-                document.querySelector("#temp-2" ).textContent = "Temp: " + tempTwo + " °F";
-                document.querySelector("#temp-3" ).textContent = "Temp: " + tempThree + " °F";
-                document.querySelector("#temp-4" ).textContent = "Temp: " + tempFour + " °F";
+                document.querySelector("#temp-0" ).textContent = "Temp: " + roundedTempZero + " °F";
+                document.querySelector("#temp-1" ).textContent = "Temp: " + roundedTempOne + " °F";
+                document.querySelector("#temp-2" ).textContent = "Temp: " + roundedTempTwo + " °F";
+                document.querySelector("#temp-3" ).textContent = "Temp: " + roundedTempThree + " °F";
+                document.querySelector("#temp-4" ).textContent = "Temp: " + roundedTempFour + " °F";
                 // Setting wind
                 document.querySelector("#wind-0").textContent = "Wind: " + windZero + " mph";
                 document.querySelector("#wind-1").textContent = "Wind: " + windOne + " mph";
@@ -151,6 +167,21 @@ var day = ["1","2","3","4","5"]
             document.getElementById("icon-"+ [i]).textContent = ""
         // }
     }}
+    var saveLocation = function(cityName) {
+        fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=48b311c4f19922ba7960ce06e7fd7ee4").then(function(response) {
+            if (response.ok) {
+                
+        var newButtonEl = document.createElement("input");
+        newButtonEl.value = cityName;
+        newButtonEl.type = "submit"
+        document.getElementById("stored-buttons").appendChild(newButtonEl)
+        $(newButtonEl).addClass("btn btn-secondary stored-buttons")
+                }
+                else {
+                    window.alert ("Please Enter a City")
+                }
+    })}
+
     // event listener for search button
     searchButton.on("click", function(){
             //    Input of City
@@ -162,12 +193,11 @@ var day = ["1","2","3","4","5"]
                     clearContent();
                     fiveDayForecast(cityName);
                     gettingWeather(cityName);
+                    saveLocation(cityName);
+                    
 
 
                 } 
-
-        
-
     });
 
 
